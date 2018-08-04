@@ -6,6 +6,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.addQuestion = this.addQuestion.bind(this);
+        this.deleteQuestion = this.deleteQuestion.bind(this);
         this.state = {
             questions: [],
             options: []
@@ -22,11 +23,25 @@ export default class App extends Component {
         });
     }
 
+    deleteQuestion() {
+        let {questions, options} = this.state;
+        questions.pop();
+        options.pop();
+        this.setState({
+            questions,
+            options
+        });
+    }
+
     render() {
         let {questions, options} = this.state;
         return (
             <div>
-                <LeftPanel questions={questions || []} options={options || []} addQuestion={this.addQuestion}/>
+                <LeftPanel questions={questions || []}
+                           options={options || []}
+                           addQuestion={this.addQuestion}
+                           deleteQuestion={this.deleteQuestion}
+                />
             </div>
         );
     }
