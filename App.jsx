@@ -1,15 +1,33 @@
 import React, {Component} from 'react';
 import LeftPanel from "./js/components/LeftPanel";
-import RightPanel from "./js/components/RightPanel";
 
 export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.addQuestion = this.addQuestion.bind(this);
+        this.state = {
+            questions: [],
+            options: []
+        };
+    }
+
+    addQuestion() {
+        let {questions, options} = this.state;
+        questions.push({string: "sample Text", index: questions.length});
+        options.push([{number: 0, string: "1"}, {number: 1, string: "2"}]);
+        this.setState({
+            questions,
+            options
+        });
+    }
+
     render() {
+        let {questions, options} = this.state;
         return (
             <div>
-                <LeftPanel questions={[]} options={[]}/>
-                <RightPanel questionDescription={"this is the question"} options={[{string: "answer1", number: 1}]}/>
+                <LeftPanel questions={questions || []} options={options || []} addQuestion={this.addQuestion}/>
             </div>
-        )
-            ;
+        );
     }
 }

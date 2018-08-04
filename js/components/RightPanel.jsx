@@ -9,13 +9,16 @@ export default class RightPanel extends Component {
     }
 
     getOptions() {
-        return <ul>
-            {
-                map(this.props.options, (option) => {
-                    return <li> {option.number} {option.string}</li>
-                })
-            }
-        </ul>
+        return (
+            this.props.options.length ?
+            <ul>
+                {
+                    map(this.props.options, (option) => {
+                        return <li> {option.number} ) {option.string}</li>
+                    })
+                }
+            </ul> : []
+        )
     }
 
     render() {
