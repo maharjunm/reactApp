@@ -6,53 +6,45 @@ import {find, map} from 'underscore';
 export default class LeftPanel extends Component {
     constructor(props) {
         super(props);
-        this.loadQuestions = this.loadQuestions.bind(this);
-        this.getSelectedQuestion = this.getSelectedQuestion.bind(this);
-        this.getOptionsForIt = this.getOptionsForIt.bind(this);
         this.state = {
-            selectedQuestion: "",
+            selectedQuestion: {index: -1},
             optionsForIt: []
         };
+        this.loadQuestions = this.loadQuestions.bind(this);
     }
-
-    getSelectedQuestion() {
-        return find(this.props.questions, function (question) {
-            return question.isSelected;
-        })
-    };
-
-    getOptionsForIt(selectedQuestion) {
-        return this.props.options.length ? this.props.options[selectedQuestion && selectedQuestion.index]: [];
-    };
 
     loadQuestions() {
-        let {questions} = this.props;
-        return questions.length ? (
-            <ol type="1">
-                {
-                    map(questions, function (question) {
-                        return <li> {question.string} </li>
-                    })
-                }
-            </ol>
-        ) : null;
+        let viewQuestions = [];
+        this.props.questions.map((question) => {
+            viewQuestions.push(<span onClick={() =>this.loadQuestion(question)}> {question.string}</span>);
+        });
+        return viewQuestions;
     }
 
-    componentShouldUpdate(nextProps) {
-        return this.props.questions.length !== nextProps.questions.length;
+    loadQuestion(question) {
+        console.log(question);
+        console.log(this.props.options[question.index]);
+        this.setState({
+            selectedQuestion: question,
+            optionsForIt: this.props.options[question.index]
+        });
+    }
+
+    componentShouldUpdate(nextProps, nextState) {
+        console.log("in leftPanel update");
+        return this.props.questions.length !== nextProps.questions.length || this.state.selectedQuestion.index !== nextState.selectedQuestion.index;
     }
 
     render() {
         let {questions, options, addQuestion, deleteQuestion} = this.props;
-        let selectedQuestion = this.getSelectedQuestion();
-        let optionsForIt = this.getOptionsForIt();
+        let {selectedQuestion, optionsForIt } = this.state;
         return (
             <div>
                 <p>Questions</p>
                 {this.loadQuestions()}
                 <button onClick={addQuestion}>Add</button>
                 <button onClick={deleteQuestion}>Delete</button>
-                <RightPanel questionDescription={selectedQuestion || ""} options={optionsForIt || []}/>
+                <RightPanel question={selectedQuestion} options={optionsForIt}/>
             </div>
         );
 
@@ -64,5 +56,6 @@ LeftPanel.propTypes = {
     questions: PropTypes.array,
     options: PropTypes.array,
     addQuestion: PropTypes.func,
-    deleteQuestion: PropTypes.func
+    deleteQuestion: PropTypes.func,
+    loadQuestion: PropTypes.func
 };

@@ -6,25 +6,25 @@ export default class RightPanel extends Component {
     constructor(props) {
         super(props);
         this.getOptions = this.getOptions.bind(this);
+        console.log(this.props);
     }
-
+    componentShouldUpdate(nextProps) {
+        console.log("in component should update method");
+        return this.props.question.index !== nextProps.question.index;
+    }
     getOptions() {
-        return (
-            this.props.options.length ?
-            <ul>
-                {
-                    map(this.props.options, (option) => {
-                        return <li> {option.number} ) {option.string}</li>
-                    })
-                }
-            </ul> : []
-        )
+        console.log("get Options");
+        console.log(this.props.options);
+        return this.props.options && this.props.options.map((option) => {
+            return <span> {option.number} ) {option.string}</span>
+        })
     }
 
     render() {
         return (
             <div>
-                <p> {this.props.questionDescription} </p>
+                <p> this is sample question</p>
+                <p> {this.props.question && this.props.question.string} </p>
                 {this.getOptions()}
             </div>
         );
@@ -32,6 +32,6 @@ export default class RightPanel extends Component {
 }
 
 RightPanel.propTypes = {
-    questionDescription: PropTypes.string,
+    question: PropTypes.object,
     options: PropTypes.array
 };
