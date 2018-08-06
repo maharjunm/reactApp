@@ -16,35 +16,34 @@ export default class LeftPanel extends Component {
     loadQuestions() {
         let viewQuestions = [];
         this.props.questions.map((question) => {
-            viewQuestions.push(<span onClick={() =>this.loadQuestion(question)}> {question.string}</span>);
+            viewQuestions.push(<li onClick={() => this.loadQuestion(question)}> {question.string}</li>);
         });
         return viewQuestions;
     }
 
     loadQuestion(question) {
-        console.log(question);
-        console.log(this.props.options[question.index]);
         this.setState({
             selectedQuestion: question,
             optionsForIt: this.props.options[question.index]
         });
     }
 
-    componentShouldUpdate(nextProps, nextState) {
-        console.log("in leftPanel update");
-        return this.props.questions.length !== nextProps.questions.length || this.state.selectedQuestion.index !== nextState.selectedQuestion.index;
+    componentShouldUpdate(nextProps) {
+        return this.props.questions.length !== nextProps.questions.length;
     }
 
     render() {
-        let {questions, options, addQuestion, deleteQuestion} = this.props;
-        let {selectedQuestion, optionsForIt } = this.state;
+        let {questions, options, addQuestion, deleteQuestion, updateOptions} = this.props;
+        let {selectedQuestion, optionsForIt} = this.state;
         return (
             <div>
                 <p>Questions</p>
-                {this.loadQuestions()}
+                <ol type="1">
+                    {this.loadQuestions()}
+                </ol>
                 <button onClick={addQuestion}>Add</button>
                 <button onClick={deleteQuestion}>Delete</button>
-                <RightPanel question={selectedQuestion} options={optionsForIt}/>
+                <RightPanel updateOptions={updateOptions} question={selectedQuestion} options={optionsForIt}/>
             </div>
         );
 
@@ -57,5 +56,6 @@ LeftPanel.propTypes = {
     options: PropTypes.array,
     addQuestion: PropTypes.func,
     deleteQuestion: PropTypes.func,
-    loadQuestion: PropTypes.func
+    loadQuestion: PropTypes.func,
+    updateOptions: PropTypes.func
 };

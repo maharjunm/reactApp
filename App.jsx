@@ -12,6 +12,7 @@ export default class App extends Component {
         this.addQuestion = this.addQuestion.bind(this);
         this.deleteQuestion = this.deleteQuestion.bind(this);
         this.loadQuestion = this.loadQuestion.bind(this);
+        this.updateOptions = this.updateOptions.bind(this);
     }
 
     loadQuestion(question) {
@@ -23,8 +24,6 @@ export default class App extends Component {
 
     addQuestion() {
         let {questions, options} = this.state;
-        console.log("in add question");
-        console.log(questions, options,  questions.length);
         questions.push({string: "sample Text", index: questions.length});
         options.push([{number: 0, string: "1"}, {number: 1, string: "2"}]);
         this.setState({
@@ -43,6 +42,12 @@ export default class App extends Component {
         });
     }
 
+    updateOptions(updatedOptions, index) {
+        let {options} = this.state;
+        options[index] = updatedOptions;
+        this.setState({options});
+    }
+
     render() {
         let {questions, options} = this.state;
         return (
@@ -52,6 +57,7 @@ export default class App extends Component {
                            addQuestion={this.addQuestion}
                            deleteQuestion={this.deleteQuestion}
                            loadQuestion={this.loadQuestion}
+                           updateOptions={this.updateOptions}
                 />
             </div>
         );
