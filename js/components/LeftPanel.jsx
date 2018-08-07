@@ -37,7 +37,7 @@ export default class LeftPanel extends Component {
         let {selectedQuestion, optionsForIt} = this.state;
         return (
             <div>
-                <p>Questions</p>
+                <p>Select your Questions</p>
                 <ol type="1">
                     {this.loadQuestions()}
                 </ol>

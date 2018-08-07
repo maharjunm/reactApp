@@ -55,7 +55,7 @@ export default class RightPanel extends Component {
         let {addOption, deleteOptions} = this.props;
         return (
             <div>
-                <p> this is sample question</p>
+                { question.index > -1 && <p> Design Question {question.index + 1}</p>}
                 { question.index > -1 &&
                 <input type='text' onChange={(e) => {
                     this._handleQuestionChangeEvent(question.index, e)
