@@ -32,8 +32,6 @@ export default class RightPanel extends Component {
     }
 
     _handleQuestionChangeEvent(index, e) {
-        console.log("on change");
-        console.log(index, e)
         this.props.updateQuestion(e.target.value, index);
     }
 
@@ -44,7 +42,7 @@ export default class RightPanel extends Component {
                 <li>
                     <input onChange={(e) => {
                         this._handleChangeEvent(option.number, e);
-                    }} type='text' value={option.string}/>
+                    }} type='text' value={option.string || ''}/>
                 </li>
             );
         })
@@ -54,7 +52,7 @@ export default class RightPanel extends Component {
         let {question, options} = this.state;
         let {addOption, deleteOptions} = this.props;
         return (
-            <div>
+            <div className={'panel--right'}>
                 { question.index > -1 && <p> Design Question {question.index + 1}</p>}
                 { question.index > -1 &&
                 <input type='text' onChange={(e) => {
