@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LeftPanel from "./js/components/LeftPanel";
 import {forEach} from 'underscore';
+import './js/components/App.scss';
 export default class App extends Component {
 
     constructor(props) {
