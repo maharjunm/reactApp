@@ -33,7 +33,7 @@ export default class LeftPanel extends Component {
     }
 
     render() {
-        let {questions, options, addQuestion, deleteQuestion, updateOptions} = this.props;
+        let {addQuestion, deleteQuestion, updateOptions, updateQuestion} = this.props;
         let {selectedQuestion, optionsForIt} = this.state;
         return (
             <div>
@@ -43,7 +43,12 @@ export default class LeftPanel extends Component {
                 </ol>
                 <button onClick={addQuestion}>Add</button>
                 <button onClick={deleteQuestion}>Delete</button>
-                <RightPanel updateOptions={updateOptions} question={selectedQuestion} options={optionsForIt}/>
+                <RightPanel
+                    updateOptions={updateOptions}
+                    updateQuestion={updateQuestion}
+                    question={selectedQuestion}
+                    options={optionsForIt}
+                />
             </div>
         );
 
@@ -57,5 +62,6 @@ LeftPanel.propTypes = {
     addQuestion: PropTypes.func,
     deleteQuestion: PropTypes.func,
     loadQuestion: PropTypes.func,
-    updateOptions: PropTypes.func
+    updateOptions: PropTypes.func,
+    updateQuestion: PropTypes.func
 };

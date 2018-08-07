@@ -16,8 +16,6 @@ export default class RightPanel extends Component {
     }
 
     componentShouldUpdate(nextProps) {
-        console.log("in update method");
-        console.log(nextProps);
         return this.props.question.index !== nextProps.question.index;
     }
 
@@ -32,6 +30,12 @@ export default class RightPanel extends Component {
         let {options, question} = this.state;
         options[index].string = e.target.value;
         this.props.updateOptions(options, question.index);
+    }
+
+    _handleQuestionChangeEvent(index, e) {
+        console.log("on change");
+        console.log(index, e)
+        this.props.updateQuestion(e.target.value, index);
     }
 
 
@@ -49,7 +53,9 @@ export default class RightPanel extends Component {
         return (
             <div>
                 <p> this is sample question</p>
-                {question.string && <input type='text' value={question.string}/>}
+                {question.string &&
+                <input type='text' onChange={(e) => {this._handleQuestionChangeEvent(question.index, e)}} value={question.string}/>
+                }
                 <ol>
                     {this.getOptions(options)}
                 </ol>
@@ -61,5 +67,6 @@ export default class RightPanel extends Component {
 RightPanel.propTypes = {
     question: PropTypes.object,
     options: PropTypes.array,
-    updateOptions: PropTypes.func
+    updateOptions: PropTypes.func,
+    updateQuestion: PropTypes.func
 };

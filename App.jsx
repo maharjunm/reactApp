@@ -13,6 +13,7 @@ export default class App extends Component {
         this.deleteQuestion = this.deleteQuestion.bind(this);
         this.loadQuestion = this.loadQuestion.bind(this);
         this.updateOptions = this.updateOptions.bind(this);
+        this.updateQuestion = this.updateQuestion.bind(this);
     }
 
     loadQuestion(question) {
@@ -48,6 +49,16 @@ export default class App extends Component {
         this.setState({options});
     }
 
+    updateQuestion(question, index) {
+        console.log("========");
+        console.log(this.state)
+        let {questions} = this.state;
+        console.log("-----------");
+        console.log(questions);
+        questions[index].string = question;
+        this.setState({questions});
+    }
+
     render() {
         let {questions, options} = this.state;
         return (
@@ -58,6 +69,7 @@ export default class App extends Component {
                            deleteQuestion={this.deleteQuestion}
                            loadQuestion={this.loadQuestion}
                            updateOptions={this.updateOptions}
+                           updateQuestion={this.updateQuestion}
                 />
             </div>
         );
