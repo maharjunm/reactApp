@@ -76,7 +76,7 @@ export default class App extends Component {
     render() {
         let {questions, options} = this.state;
         return (
-            <div className={'panel'}>
+            <div className={'app'}>
                 <LeftPanel questions={questions}
                            options={options}
                            addQuestion={this.addQuestion}

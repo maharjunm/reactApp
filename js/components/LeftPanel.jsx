@@ -36,21 +36,25 @@ export default class LeftPanel extends Component {
         let {addQuestion, deleteQuestion, updateOptions, deleteOptions, updateQuestion, addOption} = this.props;
         let {selectedQuestion, optionsForIt} = this.state;
         return (
-            <div className={'panel--left'}>
-                <span>Select your Questions</span>
-                <ol type="1">
-                    {this.loadQuestions()}
-                </ol>
-                <button onClick={addQuestion}>Add</button>
-                <button onClick={deleteQuestion}>Delete</button>
-                <RightPanel
-                    updateOptions={updateOptions}
-                    updateQuestion={updateQuestion}
-                    question={selectedQuestion}
-                    options={optionsForIt}
-                    addOption={addOption}
-                    deleteOptions={deleteOptions}
-                />
+            <div className={'panel'}>
+                <div className={'panel--left'}>
+                    <span>Select your Questions</span>
+                    <ol type="1">
+                        {this.loadQuestions()}
+                    </ol>
+                    <button onClick={addQuestion}>Add</button>
+                    <button onClick={deleteQuestion}>Delete</button>
+                </div>
+                <div className={'panel--right'}>
+                    <RightPanel
+                        updateOptions={updateOptions}
+                        updateQuestion={updateQuestion}
+                        question={selectedQuestion}
+                        options={optionsForIt}
+                        addOption={addOption}
+                        deleteOptions={deleteOptions}
+                    />
+                </div>
             </div>
         );
 

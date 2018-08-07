@@ -1,14 +1,13 @@
 module.exports = {
+    mode: "development",
     entry: "./main.js",
+    devtool: "source-map",
     resolve: {
         extensions: ['.js', '.jsx']
     },
     output: {
         path: '/',
         filename: "./index.js"
-    },
-    devServer: {
-        inline: true,
     },
     module: {
         rules: [
