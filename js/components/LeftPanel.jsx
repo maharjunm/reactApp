@@ -33,7 +33,7 @@ export default class LeftPanel extends Component {
     }
 
     render() {
-        let {addQuestion, deleteQuestion, updateOptions, updateQuestion} = this.props;
+        let {addQuestion, deleteQuestion, updateOptions, deleteOptions, updateQuestion, addOption} = this.props;
         let {selectedQuestion, optionsForIt} = this.state;
         return (
             <div>
@@ -48,6 +48,8 @@ export default class LeftPanel extends Component {
                     updateQuestion={updateQuestion}
                     question={selectedQuestion}
                     options={optionsForIt}
+                    addOption={addOption}
+                    deleteOptions={deleteOptions}
                 />
             </div>
         );
@@ -63,5 +65,7 @@ LeftPanel.propTypes = {
     deleteQuestion: PropTypes.func,
     loadQuestion: PropTypes.func,
     updateOptions: PropTypes.func,
-    updateQuestion: PropTypes.func
+    updateQuestion: PropTypes.func,
+    addOption: PropTypes.func,
+    deleteOptions: PropTypes.func
 };

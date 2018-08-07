@@ -10,6 +10,8 @@ export default class App extends Component {
             options: []
         };
         this.addQuestion = this.addQuestion.bind(this);
+        this.addOption = this.addOption.bind(this);
+        this.deleteOptions = this.deleteOptions.bind(this);
         this.deleteQuestion = this.deleteQuestion.bind(this);
         this.loadQuestion = this.loadQuestion.bind(this);
         this.updateOptions = this.updateOptions.bind(this);
@@ -25,10 +27,18 @@ export default class App extends Component {
 
     addQuestion() {
         let {questions, options} = this.state;
-        questions.push({string: "sample Text", index: questions.length});
-        options.push([{number: 0, string: "1"}, {number: 1, string: "2"}]);
+        questions.push({string: 'Question', index: questions.length});
+        options.push([{number: 0}, {number: 1}]);
         this.setState({
             questions,
+            options
+        });
+    }
+
+    addOption(index) {
+        let {options} = this.state;
+        options[index].push({number: options[index].length, string: ""});
+        this.setState({
             options
         });
     }
@@ -49,12 +59,16 @@ export default class App extends Component {
         this.setState({options});
     }
 
+    deleteOptions(index) {
+        let {options} = this.state;
+        options[index].pop();
+        this.setState({
+            options
+        });
+    }
+
     updateQuestion(question, index) {
-        console.log("========");
-        console.log(this.state)
         let {questions} = this.state;
-        console.log("-----------");
-        console.log(questions);
         questions[index].string = question;
         this.setState({questions});
     }
@@ -66,10 +80,12 @@ export default class App extends Component {
                 <LeftPanel questions={questions}
                            options={options}
                            addQuestion={this.addQuestion}
+                           addOption={this.addOption}
                            deleteQuestion={this.deleteQuestion}
                            loadQuestion={this.loadQuestion}
                            updateOptions={this.updateOptions}
                            updateQuestion={this.updateQuestion}
+                           deleteOptions={this.deleteOptions}
                 />
             </div>
         );

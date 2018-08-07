@@ -8,7 +8,6 @@ export default class RightPanel extends Component {
     }
 
     componentWillMount() {
-        console.log("in component will mount");
         this.state = {
             question: this.props.question,
             options: this.props.options
@@ -39,26 +38,40 @@ export default class RightPanel extends Component {
     }
 
 
-
     getOptions(options) {
         return options && options.map((option) => {
-            return <li><input onChange={(e) => {
-                this._handleChangeEvent(option.number, e);
-            }} type='text' value={option.string}/></li>;
+            return (
+                <li>
+                    <input onChange={(e) => {
+                        this._handleChangeEvent(option.number, e);
+                    }} type='text' value={option.string}/>
+                </li>
+            );
         })
     }
 
     render() {
         let {question, options} = this.state;
+        let {addOption, deleteOptions} = this.props;
         return (
             <div>
                 <p> this is sample question</p>
-                {question.string &&
-                <input type='text' onChange={(e) => {this._handleQuestionChangeEvent(question.index, e)}} value={question.string}/>
+                { question.index > -1 &&
+                <input type='text' onChange={(e) => {
+                    this._handleQuestionChangeEvent(question.index, e)
+                }} value={question.string}/>
                 }
                 <ol>
                     {this.getOptions(options)}
                 </ol>
+                {
+                    options.length ? (
+                        <div>
+                            <button onClick={() => addOption(question.index)} disabled={options.length < 2 || options.length > 5}> Add</button>
+                            <button onClick={() => deleteOptions(question.index)} disabled={options.length < 3}> Delete</button>
+                        </div>) : null
+                }
+
             </div>
         );
     }
@@ -68,5 +81,7 @@ RightPanel.propTypes = {
     question: PropTypes.object,
     options: PropTypes.array,
     updateOptions: PropTypes.func,
-    updateQuestion: PropTypes.func
+    updateQuestion: PropTypes.func,
+    addOption: PropTypes.func,
+    deleteOptions: PropTypes.func
 };
