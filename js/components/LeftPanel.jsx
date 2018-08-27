@@ -16,7 +16,7 @@ export default class LeftPanel extends Component {
     loadQuestions() {
         let viewQuestions = [];
         this.props.questions.map((question) => {
-            viewQuestions.push(<li onClick={() => this.loadQuestion(question)}> {question.string}</li>);
+            viewQuestions.push(<li className={'question-title'} onClick={() => this.loadQuestion(question)}> {question.string}</li>);
         });
         return viewQuestions;
     }
@@ -38,12 +38,12 @@ export default class LeftPanel extends Component {
         return (
             <div className={'panel'}>
                 <div className={'panel--left'}>
-                    <span>Select your Questions</span>
+                    <h2 className={'header'}>Select your Questions</h2>
                     <ol type="1">
                         {this.loadQuestions()}
                     </ol>
-                    <button onClick={addQuestion}>Add</button>
-                    <button onClick={deleteQuestion}>Delete</button>
+                    <button className={'button'} onClick={addQuestion}>Add</button>
+                    <button className={'button'} onClick={deleteQuestion}>Delete</button>
                 </div>
                 <div className={'panel--right'}>
                     <RightPanel

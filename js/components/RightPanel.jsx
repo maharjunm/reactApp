@@ -39,8 +39,8 @@ export default class RightPanel extends Component {
     getOptions(options) {
         return options && options.map((option) => {
             return (
-                <li>
-                    <input onChange={(e) => {
+                <li className={'option'}>
+                    <input className={'option-input'} onChange={(e) => {
                         this._handleChangeEvent(option.number, e);
                     }} type='text' value={option.string || ''}/>
                 </li>
@@ -52,21 +52,21 @@ export default class RightPanel extends Component {
         let {question, options} = this.state;
         let {addOption, deleteOptions} = this.props;
         return (
-            <div className={'panel--right'}>
-                { question.index > -1 && <p> Design Question {question.index + 1}</p>}
+            <div>
+                { question.index > -1 && <h2 className={'header'}> Design Question {question.index + 1}</h2>}
                 { question.index > -1 &&
-                <input type='text' onChange={(e) => {
+                <input className={'question-input'} type='text' onChange={(e) => {
                     this._handleQuestionChangeEvent(question.index, e)
                 }} value={question.string}/>
                 }
-                <ol>
+                <ol className={'options'}>
                     {this.getOptions(options)}
                 </ol>
                 {
                     options.length ? (
-                        <div>
-                            <button onClick={() => addOption(question.index)} disabled={options.length < 2 || options.length > 5}> Add</button>
-                            <button onClick={() => deleteOptions(question.index)} disabled={options.length < 3}> Delete</button>
+                        <div className={'option-buttons'}>
+                            <button className={'button'} onClick={() => addOption(question.index)} disabled={options.length < 2 || options.length > 5}> Add Option</button>
+                            <button className={'button'} onClick={() => deleteOptions(question.index)} disabled={options.length < 3}> Delete Option</button>
                         </div>) : null
                 }
 

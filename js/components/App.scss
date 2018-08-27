@@ -1,3 +1,55 @@
+.panel {
+  display: flex;
+}
+
 .panel--left {
+  display: block;
+  overflow: auto;
   background: lightblue;
+  width: 450px;
+}
+
+.question-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.button {
+  font-size: 20px;
+  padding: 0 15px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.panel--right {
+  margin-left: 50px;
+  background: rosybrown;
+  width: 600px;
+}
+
+.question-input {
+  margin-left: 50px;
+  font-size: 20px;
+  height: 40px;
+  width: 450px;
+}
+
+.option-input {
+  height: 40px;
+  width: 300px;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+.option-buttons {
+  margin-left: 75px;
+}
+
+.options {
+  margin-left: 25px;
+}
+
+.header {
+  margin-left: 15px;
 }
