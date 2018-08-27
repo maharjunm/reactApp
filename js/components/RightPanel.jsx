@@ -13,10 +13,10 @@ export default class RightPanel extends Component {
             options: this.props.options
         };
     }
-
-    componentShouldUpdate(nextProps) {
-        return this.props.question.index !== nextProps.question.index;
-    }
+    //
+    // shouldComponentUpdate(nextProps) {
+    //     return this.props.question.index !== nextProps.question.index;
+    // }
 
     componentWillReceiveProps(nextProps) {
         this.setState({

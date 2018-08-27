@@ -28,9 +28,9 @@ export default class LeftPanel extends Component {
         });
     }
 
-    componentShouldUpdate(nextProps) {
-        return this.props.questions.length !== nextProps.questions.length;
-    }
+    // shouldComponentUpdate(nextProps) {
+    //     return this.props.questions.length !== nextProps.questions.length;
+    // }
 
     render() {
         let {addQuestion, deleteQuestion, updateOptions, deleteOptions, updateQuestion, addOption} = this.props;
