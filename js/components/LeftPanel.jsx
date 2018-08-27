@@ -16,7 +16,7 @@ export default class LeftPanel extends Component {
     loadQuestions() {
         let viewQuestions = [];
         this.props.questions.map((question) => {
-            viewQuestions.push(<li className={'question-title'} onClick={() => this.loadQuestion(question)}> {question.string}</li>);
+            viewQuestions.push(<li key={question.index} className={'question-title'} onClick={() => this.loadQuestion(question)}> {question.string}</li>);
         });
         return viewQuestions;
     }

@@ -39,7 +39,7 @@ export default class RightPanel extends Component {
     getOptions(options) {
         return options && options.map((option) => {
             return (
-                <li className={'option'}>
+                <li key={option.number} className={'option'}>
                     <input className={'option-input'} onChange={(e) => {
                         this._handleChangeEvent(option.number, e);
                     }} type='text' value={option.string || ''}/>
